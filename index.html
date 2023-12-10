@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNarts</title>
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- Adding background color and centering styles -->
+    <style>
+        body {
+            background-color: rgba(234, 209, 209, 0.847);
+            margin: 50px;
+            padding: 10px;
+            font-family: 'Arial', sans-serif;
+            border: 2px solid rgba(234, 209, 209, 0.847); /* Border color for the entire page */
+        }
+
+        h1 {
+            color: #2e2e2e;
+            padding: 10px; /* Padding inside the box */
+            text-align: center; /* Center text within the box */
+            max-width: 400px; /* Adjust the maximum width of the box */
+            margin-left: auto; /* Align to the left */
+            margin-right: auto; /* Align to the right */
+        }
+
+        p {
+            background-color: #e2e0e0; /* Background color for the paragraph */
+            color: #333; /* Text color for the paragraph */
+            padding: 15px; /* Padding inside the paragraph box */
+            text-align: center; /* Center text within the paragraph box */
+            max-width: 400px; /* Adjust the maximum width of the paragraph box */
+            margin-top: 20px; /* Add margin to separate the heading and paragraph */
+            margin-left: auto; /* Align to the left */
+            margin-right: auto; /* Align to the right */
+        }
+
+        /* Add a style for the links */
+        a {
+            color: rgb(179, 63, 48);
+            text-decoration: underline;
+            cursor: pointer;
+            margin: 0 10px; /* Add margin between the links */
+            position: relative; /* Make the position relative for absolute positioning of :after */
+        }
+
+        a:not(:last-child):after {
+            content: "|";
+            position: absolute;
+            right: -10px; /* Adjust the spacing of the vertical line */
+            color: #0e0c0c; /* Color of the vertical line */
+        }
+
+        /* Hide sections by default */
+        .section {
+            display: none;
+        }
+
+        /* Display the selected section */
+        .section.active {
+            display: block;
+        }
+
+        /* Add a style for the images */
+        img {
+            max-width: 100%; /* Make sure the image doesn't exceed its container */
+            height: auto; /* Maintain the aspect ratio of the image */
+            margin-top: 10px; /* Add margin above each image */
+            display: inline-block; /* Display images in a line */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            width: 23%; /* Set the width to approximately 1/4th of the container */
+            margin-right: 1%; /* Add a small margin between images */
+            cursor: pointer; /* Add cursor pointer for clickable images */
+        }
+
+        /* Popup styles */
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(227, 223, 223, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; 
+        }
+
+        .popup-content {
+            background: #636161;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+            text-align: center;
+        }
+
+        #popup-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+    </style>
+
+    <!-- Adding JavaScript for toggling sections and image popup -->
+    <script>
+        // Function to toggle the visibility of a section
+        function toggleSection(sectionId) {
+            // Hide all sections
+            var sections = document.querySelectorAll('.section');
+            sections.forEach(function (section) {
+                section.classList.remove('active');
+            });
+
+            // Display the selected section
+            var selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('active');
+
+            // Load images if it's the Artworks section
+            if (sectionId === 'artwork-section') {
+                loadImages();
+            }
+        }
+
+        // Function to load images dynamically
+        function loadImages() {
+            var artworkContainer = document.getElementById('artwork-container');
+            artworkContainer.innerHTML = ''; // Clear previous images
+
+            // Replace these paths with the actual paths or URLs of your images
+            var imagePaths = ["1.JPG", "2.JPG", "3.JPG", "4.JPG", "5.JPG", "6.JPG", "7.JPG", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg"];
+            
+
+            imagePaths.forEach(function (path, index) {
+                var img = document.createElement('img');
+                img.src = path;
+                img.alt = 'Artwork';
+                img.onclick = function () {
+                    openImagePopup(path, 'Art:The Therapy', 'Additional text for Image ' + (index + 1)); // Replace with your actual caption
+                };
+                artworkContainer.appendChild(img);
+            });
+        }
+
+        // Function to open the image pop-up
+        function openImagePopup(imagePath, caption, additionalText) {
+    var popupContainer = document.getElementById('image-popup');
+    var popupImage = document.getElementById('popup-image');
+    var popupCaption = document.getElementById('popup-caption');
+    var popupText = document.getElementById('popup-text');
+
+    popupImage.src = imagePath;
+    popupCaption.textContent = caption; // Set the caption
+
+    // Set different descriptions based on the image path or other criteria
+    switch (imagePath) {
+        case '1.JPG':
+            popupText.textContent = 'This painting perfectly captures my inner foodies desire for the perfect combination of chai and pakora on rainy days.and my inner foodie motivated me to create an artwork out of my craving.';
+            break;
+        case '2.JPG':
+            popupText.textContent = 'Warli paintings are a type of folk art and can be found mainly in the state of Maharashtra, India. Warli paintings first became popular in the 1930s and warli artists typically use natural colors on a white background.';
+            break;
+        case '3.JPG':
+            popupText.textContent ='one of my favourite pieces of art, which came from an illustration of an African tribe in a book I read';
+            break;
+        case '4.JPG':
+             popupText.textContent ='Travelling through the trees and forest at night in a smoke engine has always been a fantasy of mine that I have incorporated into my artwork.';
+            break;
+            case '5.JPG':
+        popupText.textContent ='Everyone has the fantasy of spending endless hours at midnight conversing by a campfire with their favourite person, and that is what my artwork portrays. I know this sounds absurd.';
+            break;
+            case '6.JPG':
+        popupText.textContent ='Mountains are the symbol of tranquilly.and this little artwork I created to serve as a reminder to find mountains whenever youre feeling down.';
+            break;
+            case '7.JPG':
+        popupText.textContent ='The word "budhha" means "one who awakens," and it took me too long to obtain such an abstract backdrop. At last, the result of my labours is this.';
+            break;
+            case '8.jpg':
+        popupText.textContent ='My happy place is down the street riding a bike.';
+            break;
+            case '9.jpg':
+        popupText.textContent ='I created this artwork based on a Chinese drama I watched over the summer.The significance of friendship is portrayed in my artwork.';
+            break;
+            case '10.jpg':
+        popupText.textContent ='Oh my goodness, this is one of my favourite pieces of art. It depicts a stunning girl.';
+            break;
+            case '11.jpg':
+        popupText.textContent ='A man with musical talent :)';
+            break;
+            case '12.jpg':
+        popupText.textContent ='Who among us dislikes Spider-Man?one more little artwork';
+            break;
+            case '13.jpg':
+        popupText.textContent ='Canvas miniature artwork featuring a boat on the water.motivated by one of my favourite Instagrammers';
+            break;
+            case '14.jpg':
+        popupText.textContent ='I now have the cutest bear on my paper.Hello, this adorable creature';
+            break;
+            case '15.jpg':
+        popupText.textContent ='I ve always imagined a house in the middle of a farm, surrounded by bushes and trees, and this is what my artwork depicts.';
+            break;
+            case '16.jpg':
+        popupText.textContent ='A punjabi uncle is saying balleh balleh!';
+            break;
+        // Add cases for other images as needed
+        default:
+            popupText.textContent = 'Art By-Manu';
+            break;
+    }
+
+    popupContainer.style.display = 'flex';
+}
+
+
+        // Function to close the image pop-up
+        function closeImagePopup() {
+            var popupContainer = document.getElementById('image-popup');
+            popupContainer.style.display = 'none';
+        }
+        // Function to handle form submission
+function submitForm() {
+  // Here, you'll add the logic to submit the form data to the server
+  // Once the submission is successful, display the success message
+
+  // For demonstration purposes, let's simulate a successful submission after 2 seconds
+  setTimeout(showSuccessMessage, 4000);
+}
+
+// Function to show the success message
+function showSuccessMessage() {
+  // Display the success message by changing the display style of the popup
+  const successPopup = document.getElementById('success-popup');
+  successPopup.style.display = 'block';
+
+  // You can customize the appearance or styling of the success popup as needed
+}
+
+    </script>
+</head>
+<body>
+    <h1>MN ART GALLERY</h1>
+    <p>ART: The Therapy</p>
+    <hr>
+    
+    <!-- Navigation links -->
+    <a href="#" onclick="toggleSection('home-section')">Home</a>
+    <a href="#" onclick="toggleSection('about-section')">About</a>
+    <a href="#" onclick="toggleSection('artwork-section')">Artworks</a>
+    <a href="#" onclick="toggleSection('contact-section')">Contact</a>
+
+    <!-- Home Section -->
+    <div id="home-section" class="section active">
+        <p>Welcome to the MN Art Gallery!</p>
+        <img src="home.png" alt="Home Image" style="width: 100%; max-height: 500px; display: block; margin: auto;">
+    </div>
+
+    <!-- About Section -->
+    <div id="about-section" class="section">
+        <h2 style="text-align:center; margin-bottom:20px">About the Artist</h2>
+        <div style="text-align: center;">
+            <img src="about.jpg" alt="About Image" style="width: 51mm; height: 51mm;">
+            <div style="flex: 2; margin-left: 20px;">
+                <p style="line-height: 1.5;">
+                    Muppidi NagaManogna
+                    <br><br>
+                    Self-Learned Artist
+                    <br><br>
+                    Art Explorer
+                    <br><br>
+                    Contact: muppidinagamanogna@gmail.com
+                </p>
+            </div>
+        </div>
+        
+    </div>
+    
+
+    <!-- Artwork Section -->
+    <div id="artwork-section" class="section">
+        <h2>Artworks</h2>
+        <div id="artwork-container"></div>
+    </div>
+
+    <!-- Contact Section -->
+    <form action="http://localhost:4000/contact-form" method="POST"></form>
+    <div id="contact-section" class="section">
+        <h2 style="text-align:center; margin-bottom:20px">Contact Me</h2>
+        <form id="contact-form">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div style="text-align: center; margin-bottom: 10px;">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="1" required></textarea>
+            </div>
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                <label for="rating">Rate my Arts</label>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5" title="5 stars">5</label>
+    
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4" title="4 stars">4</label>
+    
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3" title="3 stars">3</label>
+    
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2" title="2 stars">2</label>
+    
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1" title="1 star">1</label>
+                </div>
+            </div>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <button type="submit" onclick="submitForm()">Let's Collabrate</button>
+            </div>
+        </form>
+        
+<!-- Popup Message 
+<div id="success-popup" style="display: none;">
+    <p>Your form has been submitted successfully!</p>
+  </div>-->
+  
+    </div>
+
+    <!-- Image Popup Container -->
+    <div id="image-popup" class="popup-container" onclick="closeImagePopup()">
+        <div class="popup-content">
+            <img id="popup-image" alt="Artwork">
+            <p id="popup-caption"></p>
+            <p id="popup-text"></p>
+        </div>
+    </div>
+</body>
+</html>
